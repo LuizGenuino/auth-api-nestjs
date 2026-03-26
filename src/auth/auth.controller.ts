@@ -5,13 +5,11 @@ import type { SignInDTO, SignUpDTO } from './DTOs/auth';
 @Controller('auth')
 export class AuthController {
 
-    constructor(private authService: AuthController){}
+    constructor(private authService: AuthController) { }
 
     @Post('signup')
     async signup(@Body() body: SignUpDTO) {
-        await this.authService.signup(body)
-
-        return body
+        return this.authService.signup(body)
     }
 
     @Post('signin')
@@ -21,4 +19,3 @@ export class AuthController {
         return body
     }
 }
- 
