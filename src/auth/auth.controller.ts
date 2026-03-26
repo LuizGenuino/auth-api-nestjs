@@ -1,4 +1,24 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
+import type { SignInDTO, SignUpDTO } from './DTOs/auth';
 
+// Controller: define os end points do modulo e recebe os atributos da requisição
 @Controller('auth')
-export class AuthController {}
+export class AuthController {
+
+    constructor(private authService: AuthController){}
+
+    @Post('signup')
+    async signup(@Body() body: SignUpDTO) {
+        await this.authService.signup(body)
+
+        return body
+    }
+
+    @Post('signin')
+    async signin(@Body() body: SignInDTO) {
+        this.authService.signin(body)
+
+        return body
+    }
+}
+ 
